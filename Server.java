@@ -24,18 +24,22 @@ public class Server {
      {
          
     ServerSocket servSoc = new ServerSocket(4445);
+    while(true)
+    {
     Socket soc = servSoc.accept();
     Scanner scan = new Scanner(soc.getInputStream());
          int number = scan.nextInt();
          
-         while (number =! 0 )
-         {
+         //while (number =! 0 )
+         //{
+             //Scanner scan = new Scanner(soc.getInputStream());
+         //int number = scan.nextInt();
          int temp = number * 2;
          PrintStream ps = new PrintStream(soc.getOutputStream());
          ps.println(temp);
-         System.out.print("Message to server recieved");
-         }
-    
+         //System.out.print("Message to server recieved");
+         //}
+    }
      }
     /*
     public static void main(String[] args) throws IOException 
