@@ -5,8 +5,10 @@
  */
 package server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -24,22 +26,20 @@ public class Server {
      {
          
     ServerSocket servSoc = new ServerSocket(4445);
-    while(true)
-    {
+    //while(true)
+    //{
     Socket soc = servSoc.accept();
+    final BufferedReader in;
+    final PrintWriter out;
     Scanner scan = new Scanner(soc.getInputStream());
          int number = scan.nextInt();
-         
-         //while (number =! 0 )
-         //{
-             //Scanner scan = new Scanner(soc.getInputStream());
-         //int number = scan.nextInt();
+       
          int temp = number * 2;
          PrintStream ps = new PrintStream(soc.getOutputStream());
          ps.println(temp);
          //System.out.print("Message to server recieved");
          //}
-    }
+    //}
      }
     /*
     public static void main(String[] args) throws IOException 
