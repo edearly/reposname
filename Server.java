@@ -27,18 +27,21 @@ public class Server {
      {
          
      ServerSocket servSoc = new ServerSocket(4445);
+     while(true)
+     {
     Socket soc = servSoc.accept();
     Scanner scan = new Scanner(soc.getInputStream());
          int number = scan.nextInt();
-         System.out.println("Number Recieved");
+         System.out.println("Number Recieved " + number);
          int temp = number * 2;
          System.out.println("number returned " + temp);
          PrintStream ps = new PrintStream(soc.getOutputStream());
          ps.println(temp);
          //System.out.print("Message to server recieved");
          //}
-    //}
+    }
      }
+     
 
 
 //while(true)

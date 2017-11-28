@@ -35,14 +35,16 @@ public class Client {
     }
         }
     
-      */  
+      */  while(true)
+      {
         int number, temp;
     Socket socket = new Socket ("127.0.0.1", 4445); //
-    System.out.println("connected");
+    System.out.println("Connected to server");
+    
+    
     Scanner scanner = new Scanner(System.in); //accept input from user
     Scanner scanner1 = new Scanner (socket.getInputStream()); //get the input from server
     
-    //while ();
     System.out.println(socket);
     System.out.println("enter number");
     number = scanner.nextInt(); //store output 
@@ -56,5 +58,6 @@ public class Client {
     
 }
     
+}
 }
 
