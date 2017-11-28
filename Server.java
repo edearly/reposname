@@ -6,6 +6,7 @@
 package server;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -24,12 +25,35 @@ public class Server {
      */
     public static void main(String[] args) throws IOException 
      {
-         try
+         
+     ServerSocket servSoc = new ServerSocket(4445);
+    Socket soc = servSoc.accept();
+    Scanner scan = new Scanner(soc.getInputStream());
+         int number = scan.nextInt();
+         System.out.println("Number Recieved");
+         int temp = number * 2;
+         System.out.println("number returned " + temp);
+         PrintStream ps = new PrintStream(soc.getOutputStream());
+         ps.println(temp);
+         //System.out.print("Message to server recieved");
+         //}
+    //}
+     }
+
+
+//while(true)
+         
+         /*try
          {
     ServerSocket servSoc = new ServerSocket(4445);
     Socket soc = servSoc.accept(); //accept request to this socket
     System.out.println("Connected");
+    
+    DataOutputStream dos = new DataOutputStream(soc.getOutputStream());
+    dos.writeUTF("Welcome to Socket");
          } catch (Exception e){}
+         
+         }
          /*
     Scanner scan = new Scanner(soc.getInputStream()); //scanner to use the sicket
          int number = scan.nextInt(); //accept number from the user
@@ -60,7 +84,7 @@ public class Server {
      }
 */
 }
-}
+
     
     
 

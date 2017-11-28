@@ -5,6 +5,7 @@
  */
 package Project1;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -18,13 +19,26 @@ import java.util.Scanner;
 public class Client {
     public static void main(String args []) throws UnknownHostException, IOException
     {
+       /* while(true)
+        {
     try
     {
     int number, temp;
     Socket socket = new Socket ("127.0.0.1", 4445); //
     System.out.println("connected");
+    
+    DataInputStream dis = new DataInputStream(socket.getInputStream());
+    String msg = dis.readUTF();
+    
+    System.out.println(msg);
     } catch (Exception e) {}
-    /*
+    }
+        }
+    
+      */  
+        int number, temp;
+    Socket socket = new Socket ("127.0.0.1", 4445); //
+    System.out.println("connected");
     Scanner scanner = new Scanner(System.in); //accept input from user
     Scanner scanner1 = new Scanner (socket.getInputStream()); //get the input from server
     
@@ -41,6 +55,6 @@ public class Client {
     
     
 }
-    */
+    
 }
-}
+
