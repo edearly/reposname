@@ -24,17 +24,18 @@ public class Server {
      */
     public static void main(String[] args) throws IOException 
      {
-         
+         try
+         {
     ServerSocket servSoc = new ServerSocket(4445);
-    //while(true)
-    //{
-    Socket soc = servSoc.accept();
-    final BufferedReader in;
-    final PrintWriter out;
-    Scanner scan = new Scanner(soc.getInputStream());
-         int number = scan.nextInt();
-       
+    Socket soc = servSoc.accept(); //accept request to this socket
+    System.out.println("Connected");
+         } catch (Exception e){}
+         /*
+    Scanner scan = new Scanner(soc.getInputStream()); //scanner to use the sicket
+         int number = scan.nextInt(); //accept number from the user
+         System.out.println("Number Recieved");
          int temp = number * 2;
+         System.out.println("number returned " + temp);
          PrintStream ps = new PrintStream(soc.getOutputStream());
          ps.println(temp);
          //System.out.print("Message to server recieved");
@@ -58,6 +59,7 @@ public class Server {
     
      }
 */
+}
 }
     
     
