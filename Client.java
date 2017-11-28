@@ -6,6 +6,7 @@
 package Project1;
 
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -40,10 +41,15 @@ public class Client {
         int number, temp;
     Socket socket = new Socket ("127.0.0.1", 4445); //
     System.out.println("Connected to server");
-    
+       //send files over TCP
+    //finding how many files are avaliable to client
+    //list files in directory and count them
+    //list
+    //each file has a identifier 
     
     Scanner scanner = new Scanner(System.in); //accept input from user
     Scanner scanner1 = new Scanner (socket.getInputStream()); //get the input from server
+    
     
     System.out.println(socket);
     System.out.println("enter number");

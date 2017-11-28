@@ -7,6 +7,7 @@ package server;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -31,10 +32,20 @@ public class Server {
      {
     Socket soc = servSoc.accept();
     Scanner scan = new Scanner(soc.getInputStream());
+    
+    
+    File f = new File("Family.txt");   //file 1
+    File f2 = new File ("input.txt");    //file 2
+    File f3 = new File ("output.txt");   // file 3
+    
+    
+    //types in list(loop)
+    //return list of files (loop)
+    //ignore
          int number = scan.nextInt();
-         System.out.println("Number Recieved " + number);
+         System.out.println("Number Recieved " + number);  //debugg statment
          int temp = number * 2;
-         System.out.println("number returned " + temp);
+         System.out.println("number returned " + temp);  // debugg statment 
          PrintStream ps = new PrintStream(soc.getOutputStream());
          ps.println(temp);
          //System.out.print("Message to server recieved");
