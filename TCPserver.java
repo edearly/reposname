@@ -21,16 +21,14 @@ import java.util.Scanner;
 public class TCPserver{  
 public static void main(String args[])throws Exception{   
     
- while(true)
- {
+
 System.out.println("Enter File Name: ");
 String filename;
 //System.out.println("Avalaible Files :");
 Scanner input=new Scanner(System.in); //user input 
 filename = input.nextLine(); //input stored as file name 
 //userInput.close();
-while(true) //keep in loop to keep sending to client 
-{
+
 	
 ServerSocket serverSoc=new ServerSocket(4445); 
 System.out.println ("Waiting to connect"); //waits for client to connect
@@ -43,18 +41,21 @@ System.out.println ("Connected With "+ socket.getInetAddress().toString());
 DataInputStream dataIn=new DataInputStream(socket.getInputStream());  //get input from client
 DataOutputStream dataOut=new DataOutputStream(socket.getOutputStream());  //get output from client
 //BufferedWriter bw = new BufferedWriter(dataOut.file1);
+
+while(true) //keep in loop to keep sending to client 
+{
 try
 {
 String data="";  
 
 data = dataIn.readUTF(); //reading data in file (Content)
-System.out.println("Reading file data");
+System.out.println("Scanning file data"); 
 
 if(!data.equals("stop"))
 {  
 
 System.out.println("Sending File: " +filename);
-dataOut.writeUTF(filename);  // 
+dataOut.writeUTF(filename);  // writing file data 
 dataOut.flush();  
 
 File file=new File(filename); //Variable for file 
@@ -81,7 +82,7 @@ fileIn.close();
 System.out.println("..ok"); 
 dataOut.flush(); 
 }  
-dataOut.writeUTF("stop");  
+dataOut.writeUTF("stop");  //debugging 
 System.out.println("File sent");
 dataOut.flush();  
 }
@@ -95,4 +96,4 @@ serverSoc.close();
 }
 }
 }
-}
+
