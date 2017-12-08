@@ -31,16 +31,16 @@ DataInputStream dataIn=new DataInputStream(socket.getInputStream());  //get inpu
 DataOutputStream dataOut=new DataOutputStream(socket.getOutputStream());  // show Output from user
 BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  //
 
-System.out.println("tell server to start...");
-String str="",filename="";  // be able to choose a file on your pc
+System.out.println("start server...");
+String s="",filename = "";  // be able to choose a file on your pc
 try{  //
-while(!str.equals("start"))
-	str=br.readLine(); 
+while(!s.equals("start"))
+	s = br.readLine(); 
  
-	dataOut.writeUTF(str); 
+	dataOut.writeUTF(s); //write information to the output stream
 	dataOut.flush();  
 	
-	filename=dataIn.readUTF(); 
+	filename = dataIn.readUTF(); //reading input and put into empty string 
 	System.out.println("Receving file: "+filename); //debugging 
 	filename="client"+filename;
 	System.out.println("Saving as file: "+filename); //debugging 
@@ -48,19 +48,9 @@ while(!str.equals("start"))
 long sz=Long.parseLong(dataIn.readUTF());
 System.out.println ("File Size: "+(sz/(1024*1024))+" MB");
 
-byte b[]=new byte [1024];
-System.out.println("Receving file..");
-FileOutputStream fos=new FileOutputStream(new File(filename),true);
-long bytesRead;
-do
-{
-bytesRead = dataIn.read(b, 0, b.length);
-fos.write(b,0,b.length);
-}while(!(bytesRead<1024));
-System.out.println("Comleted");
-fos.close(); 
-dataOut.close();  	
-socket.close();  
+byte b[]=new byte [1024]; //defining the size 
+System.out.println("Receving file.."); //debugging 
+FileOutputStream fileOut = new FileOutputStream(new File(filename),true);
 }
 catch(EOFException e)
 {
