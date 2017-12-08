@@ -9,11 +9,13 @@ package tcpserver;
  *
  * @author erinearly
  */
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -36,17 +38,16 @@ Socket socket=serverSoc.accept(); //accepts the connection request
 
 //once connection is made 
 
-System.out.println ("Connected With "+ socket.getInetAddress().toString());
+System.out.println ("Connected With "+ socket.getInetAddress().getHostAddress());  //toString());
 
 DataInputStream dataIn=new DataInputStream(socket.getInputStream());  //get input from client
 DataOutputStream dataOut=new DataOutputStream(socket.getOutputStream());  //get output from client
 //BufferedWriter bw = new BufferedWriter(dataOut.file1);
-
-while(true) //keep in loop to keep sending to client 
+try 
 {
-try
-{
-String data="";  
+      while (true) 
+      {
+        String data="";  
 
 data = dataIn.readUTF(); //reading data in file (Content)
 System.out.println("Scanning file data"); 
@@ -55,7 +56,7 @@ if(!data.equals("stop"))
 {  
 
 System.out.println("Sending File: " +filename);
-dataOut.writeUTF(filename);  // writing file data 
+dataOut.writeUTF(filename);  // sending file name to client 
 dataOut.flush();  
 
 File file=new File(filename); //Variable for file 
@@ -64,7 +65,7 @@ long size= (int) file.length();
 
 byte b[]=new byte [1024]; //array for byte
 
-int read;
+int filedata; 
 
 dataOut.writeUTF(Long.toString(size)); 
 dataOut.flush(); 
@@ -72,19 +73,18 @@ dataOut.flush();
 System.out.println ("Size: " + size);
 
 
-while((read = fileIn.read(b)) != -1)
+while((filedata = fileIn.read(b)) != -1) // checking file isnt null 
 {
-    dataOut.write(b, 0, read); 
+    dataOut.write(b, 0, filedata); 
     dataOut.flush(); 
 }
-fileIn.close();
-
-System.out.println("..ok"); 
+//fileIn.close();
 dataOut.flush(); 
 }  
 dataOut.writeUTF("stop");  //debugging 
 System.out.println("File sent");
 dataOut.flush();  
+}
 }
 catch(Exception e)
 {
@@ -95,5 +95,6 @@ socket.close();
 serverSoc.close();  
 }
 }
-}
+//}
+
 
