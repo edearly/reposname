@@ -56,7 +56,7 @@ long size =Long.parseLong(dataIn.readUTF()); //declaring variable for file size
 System.out.println ("File Size: "+ size +" MB"); //printing File size
   //indicate file content is saving or saved 
 
-byte b[]=new byte [500000000000000]; // array for file size 
+byte b[]=new byte [500000000]; // array for file size transfer
 System.out.println("Saving file.."); //debugging 
 FileOutputStream fileOut = new FileOutputStream(new File(filename),true); // saving new file
 long receivedBytes;
