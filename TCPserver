@@ -33,7 +33,7 @@ filename = input.nextLine(); //input stored as file name
 
 	
 ServerSocket serverSoc=new ServerSocket(4445); 
-System.out.println ("Waiting to connect"); //waits for client to connect
+System.out.println ("Waiting to connect"); //debugging waits for client to connect
 Socket socket=serverSoc.accept(); //accepts the connection request
 
 //once connection is made 
@@ -64,7 +64,7 @@ FileInputStream fileIn =new FileInputStream(file); // get file from folder
 
 long size= (int) file.length(); 
 
-byte b[]=new byte [500000000]; //array for byte
+byte buffer[]=new byte [500000000]; //array for buffer
 
 int filedata; 
 
@@ -74,9 +74,9 @@ dataOut.flush();
 System.out.println ("Size: " + size); //debugging 
 
 
-while((filedata = fileIn.read(b)) != -1) // checking file isnt null 
+while((filedata = fileIn.read(buffer)) != -1) // checking file isnt null 
 {
-    dataOut.write(b, 0, filedata); 
+    dataOut.write(buffer, 0, filedata); 
     dataOut.flush(); 
 }
 //fileIn.close();
@@ -91,7 +91,9 @@ catch(Exception e)
 {
 	
 }
+System.out.println("File Sent");
 //dataIn.close();  
 socket.close();  
 serverSoc.close();  
+}
 }
